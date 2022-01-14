@@ -37,6 +37,7 @@ export class UserRegistrationComponent implements OnInit {
     // TODO  Vérifier que la confirmation de mot de passe correspond au mot de passe
     if (this.form.form.invalid || this.model.password !== this.model.confirmPassword) {
       this.nzMessageService.error("password should be confirmed")
+      return
     }
 
     let exists = await this.userQueries.exists(this.model.username)
