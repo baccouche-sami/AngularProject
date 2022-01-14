@@ -31,6 +31,6 @@ export class PostService {
     }
 
     like(post: Post) {
-      // TODO appeler la méthode like sur PostCommands
+        post.liked = !post.liked;
     }
 }
