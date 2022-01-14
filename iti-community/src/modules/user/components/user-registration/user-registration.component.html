@@ -2,16 +2,17 @@
   <form nz-form nzLayout="vertical" #f="ngForm" (ngSubmit)="submit()">
     <nz-form-item>
       <nz-form-label nzFor="username">Username</nz-form-label>
-      <nz-form-control>
+      <nz-form-control nzErrorTip="Username requis">
         <input class="ant-input" type="text" name="username" id="username" [(ngModel)]="model.username"
-          #username="ngModel">
+          #username="ngModel" required>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label nzFor="password">Mot de passe</nz-form-label>
-      <nz-form-control>
+      <nz-form-control nzErrorTip="Password requis">
         <input class="ant-input" type="password" name="password" id="password" [(ngModel)]="model.password"
-          #password="ngModel">
+          #password="ngModel" required>
+          <nz-form-explain *ngIf="f.submitted && !password.valid">Username requis</nz-form-explain>
       </nz-form-control>
     </nz-form-item>
 

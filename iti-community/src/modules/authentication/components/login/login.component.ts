@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
 
   goToRegistration() {
     // TODO naviguer vers "/splash/register"
+    this.router.navigateByUrl("/splash/register")
   }
 
   submit() {
