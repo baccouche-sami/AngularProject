@@ -2,21 +2,28 @@
   <div class="post-author-name"></div>
 
   <!-- TIPS: [ngStyle]="{'background-image': url(...) }" -->
-  <div class="post-author-photo"></div>
-  <div class="post-date"></div>
+  <div class="post-author-photo" [ngStyle]="{'background-image': 'url(' + post.createdBy.photoUrl + ')'}" ></div>
+  <div class="post-date">{{post.createdAt}}</div>
 
   <!-- TIPS: [ngClass]="{liked: [expression booléenne]}" -->
   <div class="post-user-like">
-    <i nz-icon nzType="heart" [nzTheme]="post.liked ? 'fill' : 'outline'"></i>
+    <i (click)="like()" nz-icon nzType="heart" [nzTheme]="post.liked ? 'fill' : 'outline'"></i>
   </div>
 
   <p class="post-text">
     <!-- Afficher le texte du poste uniquement-->
+    {{post.message.text}}
   </p>
 
   <!-- Itérer sur les "attachements" du message -->
   <div class="post-attachements" *ngFor="let element of post.message.attachements">
     <!-- Utiliser ngIf pour afficher le bon composant en fonction du type d'élément-->
+    <div *ngIf="element typeof MessageTextElement">Text</div>
+    <div *ngIf="element typeof MessageLinkElement">Link</div>
+    <div *ngIf="element typeof MessageYoutubeElement">Youtube</div>
+    <div *ngIf="element typeof MessageImageElement">Image</div>
+    <div *ngIf="element typeof MessageVideoElement">Video</div>
+    <div *ngIf="element typeof MessageAudioElement">Audio</div>
   </div>
   <div #anchor></div>
 </div>
