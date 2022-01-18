@@ -18,12 +18,10 @@
   <!-- Itérer sur les "attachements" du message -->
   <div class="post-attachements" *ngFor="let element of post.message.attachements">
     <!-- Utiliser ngIf pour afficher le bon composant en fonction du type d'élément-->
-    <div *ngIf="element typeof MessageTextElement">Text</div>
-    <div *ngIf="element typeof MessageLinkElement">Link</div>
-    <div *ngIf="element typeof MessageYoutubeElement">Youtube</div>
-    <div *ngIf="element typeof MessageImageElement">Image</div>
-    <div *ngIf="element typeof MessageVideoElement">Video</div>
-    <div *ngIf="element typeof MessageAudioElement">Audio</div>
+    <app-post-attachement-image *ngIf="element.type === image" [element]="element"></app-post-attachement-image>
+    <app-post-attachement-audio *ngIf="element.type === audio" [element]="element"></app-post-attachement-audio>
+    <app-post-attachement-video *ngIf="element.type === video" [element]="element"></app-post-attachement-video>
+    <app-post-attachement-youtube *ngIf="element.type === youtube" [element]="element"></app-post-attachement-youtube>
   </div>
   <div #anchor></div>
 </div>
