@@ -1,7 +1,7 @@
 require("dotenv").config();
 import "reflect-metadata";
-
-import * as bodyParser from 'body-parser';
+const cors = require('cors');
+const bodyParser = require('body-parser');
 import { InversifyExpressServer, } from 'inversify-express-utils';
 import { config } from './config/env';
 import { container } from './config/container';
@@ -18,7 +18,6 @@ import { emitter } from "./config/emitter";
 import { registerNotificationModule } from "modules/notification";
 import { Socket } from "socket.io";
 import { verify } from "jsonwebtoken";
-import cors = require('cors');
 import { WebsocketService } from "modules/socket/servicies/WebsocketService";
 import { registerSocketModule } from "modules/socket";
 import { UserInfo } from "modules/user/domain";
