@@ -24,6 +24,7 @@ import { NotificationComponent } from './components/notification/notification.co
     CommonModule,
     NzMessageModule
   ],
+  exports:[NotificationComponent],
   declarations: [NotificationComponent]
 })
 export class NotificationModule { }

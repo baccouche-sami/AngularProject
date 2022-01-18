@@ -16,7 +16,7 @@ import { NotificationStore } from 'src/modules/notification/notification.store';
 export class UserWidgetComponent implements OnInit {
   @Output()
   toggleNotifications: EventEmitter<void> = new EventEmitter();
-
+  isVisible: boolean = false;
   user$: Observable<User | undefined>;
   photoUrl$: Observable<string | undefined>;
   hasUnread$: Observable<boolean>;

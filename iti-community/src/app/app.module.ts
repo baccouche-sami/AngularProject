@@ -26,6 +26,7 @@ import { NotificationModule } from 'src/modules/notification/notification.module
 import { WebsocketConnection } from 'src/modules/common/WebsocketConnection';
 import { SocketIoWebsocketConnection } from 'src/modules/common/SocketIoWebsocketConnection';
 import { WebSocketTopic } from 'src/modules/common/WebSocketTopic';
+import { NotificationComponent } from 'src/modules/notification/components/notification/notification.component';
 const ws = new SocketIoWebsocketConnection();
 
 registerLocaleData(fr);
