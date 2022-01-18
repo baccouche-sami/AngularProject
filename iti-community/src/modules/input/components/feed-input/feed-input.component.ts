@@ -151,7 +151,7 @@ export class FeedInputComponent {
     // TODO émettre l'évènement "messageSent"
     this.messageSent.emit({
       date: new Date(),
-      message: this.message,
+      message: this.message.trim(),
       file: this.file?? undefined
     });
   }
