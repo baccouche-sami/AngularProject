@@ -3,11 +3,12 @@
 
   <!-- TIPS: [ngStyle]="{'background-image': url(...) }" -->
   <div class="post-author-photo" [ngStyle]="{'background-image': 'url(' + post.createdBy.photoUrl + ')'}" ></div>
-  <div class="post-date">{{post.createdAt}}</div>
+  <div class="post-date">{{ post.createdAt }}</div>
 
   <!-- TIPS: [ngClass]="{liked: [expression booléenne]}" -->
   <div class="post-user-like" [ngClass]="{liked: post.liked}" >
     <i (click)="like()" nz-icon nzType="heart" [nzTheme]="post.liked ? 'fill' : 'outline'" ></i>
+    {{post.likes}}
   </div>
 
   <p class="post-text">

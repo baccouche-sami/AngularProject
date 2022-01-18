@@ -20,7 +20,6 @@ export class FeedComponent implements OnInit {
   constructor(private postService: PostService, private store: FeedStore, private socketService: FeedSocketService) {
     this.posts$ = this.store.get(s => s.posts);
     this.roomId$ = this.store.roomId$;
-    console.log(this.posts$);
   }
 
   async ngOnInit() {
