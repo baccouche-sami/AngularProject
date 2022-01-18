@@ -23,10 +23,15 @@ export class RoomMenuComponent implements OnInit {
   }
 
   async ngOnInit() {
+    let room = localStorage.getItem('roomId');
     this.rooms = await this.queries.getAll();
     this.roomSocketService.onNewRoom((room: Room)=>{
       this.rooms.push(room)
     })
+
+    if(room) {
+      this.router.navigate(["/app",room]);
+    }
 
   }
 
@@ -36,6 +41,7 @@ export class RoomMenuComponent implements OnInit {
 
   goToRoom(room: Room) {
     this.router.navigate(["/app",room.id]);
+    localStorage.setItem('roomId', room.id);
   }
 
   
