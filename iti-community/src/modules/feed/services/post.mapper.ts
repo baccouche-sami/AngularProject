@@ -2,15 +2,15 @@ import { MessageAudioElement, MessageElement, MessageImageElement, MessageTextEl
 
 export class PostMapper {
   map(data: PostData): Post {
+    let date = new Date(data.createdAt);
     return {
       ...data,
-      message: this.parseMessage(`${data.message} ${data.attachementUrl ? data.attachementUrl : ''}`.trim())
+      message: this.parseMessage(`${data.message} ${data.attachementUrl ? data.attachementUrl : ''}`.trim()),
+      createdAt : (date.getDate()).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + '/' + ((date.getMonth() + 1)).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + '/' + date.getFullYear() + ' à ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
     }
   }
 
   private parseMessage(message: string): PostMessage {
-    console.log('start parsing');
-    console.log(message);
     // TODO rajouter png jpg et gif
     const pictureRegex = /http[s]?:\/\/.+\.(jpeg|jpg|png|gif)/gmi;
 
@@ -25,7 +25,6 @@ export class PostMapper {
 
     const pictureMatche = pictureRegex.exec(message);
     if (pictureMatche) {
-      console.log('match picture');
      // TODO ajouter un attachement de type image dans attachements
      attachements.push({
        type: 'image',
@@ -35,7 +34,6 @@ export class PostMapper {
 
     const videoMatche = videoRegex.exec(message)
     if (videoMatche) {
-      console.log('match video');
      // TODO ajouter un attachement de type video dans attachements
      attachements.push({
         type: 'video',
@@ -45,7 +43,6 @@ export class PostMapper {
 
     const audioMatche = audioRegex.exec(message)
     if (audioMatche) {
-      console.log('match audio');
      // TODO ajouter un attachement de type audio dans attachements
       attachements.push({
         type: 'audio',
@@ -55,10 +52,8 @@ export class PostMapper {
 
     const youtubeMatche = youtubeRegex.exec(message)
     if (youtubeMatche) {
-      console.log('match youtube');
      // TODO ajouter un attachement de type youtube dans attachements
      let mes = message.split('=');
-     console.log('youtube : ' + mes[1])
       attachements.push({
         type: 'youtube',
         videoId: mes[1]
