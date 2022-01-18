@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { AnyNotification } from "../notification.model";
 import { NotificationStore } from "../notification.store";
 import { NotificationCommands } from "./notification.commands";
 import { NotificationQueries } from "./notification.queries";

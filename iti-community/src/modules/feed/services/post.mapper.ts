@@ -6,7 +6,7 @@ export class PostMapper {
     return {
       ...data,
       message: this.parseMessage(`${data.message} ${data.attachementUrl ? data.attachementUrl : ''}`.trim()),
-      createdAt : (date.getDate()).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + '/' + ((date.getMonth() + 1)).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + '/' + date.getFullYear() + ' à ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
+      createdAt : (date.getDate()).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + '/' + ((date.getMonth() + 1)).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + '/' + date.getFullYear() + ' à ' + (date.getHours()).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + ':' + (date.getMinutes()).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + ':' + (date.getSeconds()).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
     }
   }
 
