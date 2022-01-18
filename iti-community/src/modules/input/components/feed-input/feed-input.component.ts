@@ -9,6 +9,7 @@ import { MessageSentEventPayload } from '../../input.model';
   templateUrl: './feed-input.component.html',
   styleUrls: ['./feed-input.component.less']
 })
+
 export class FeedInputComponent {
   @Output()
   messageSent: EventEmitter<MessageSentEventPayload> = new EventEmitter();
@@ -148,7 +149,11 @@ export class FeedInputComponent {
    */
   fireMessageSent() {
     // TODO émettre l'évènement "messageSent"
-    this.messageSent.emit();
+    this.messageSent.emit({
+      date: new Date(),
+      message: this.message,
+      file: this.file?? undefined
+    });
   }
 
   /**
