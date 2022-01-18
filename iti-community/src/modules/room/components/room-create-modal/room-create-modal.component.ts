@@ -29,10 +29,11 @@ export class RoomCreateModalComponent implements OnInit {
 
   async onOk() {
     if (this.form.form.valid) {
-      this.roomService.create(this.model.name,this.model.type).then((result) => {
+      this.roomService.create(this.model.name,this.model.type).then(async (result) => {
+        await this.roomService.fetch()
         this.close();
       }).catch((err) => {
-        
+
         console.log(err);
         
       });
