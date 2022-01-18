@@ -10,6 +10,7 @@ export class PostMapper {
 
   private parseMessage(message: string): PostMessage {
     console.log('start parsing');
+    console.log(message);
     // TODO rajouter png jpg et gif
     const pictureRegex = /http[s]?:\/\/.+\.(jpeg|jpg|png|gif)/gmi;
 
@@ -56,9 +57,11 @@ export class PostMapper {
     if (youtubeMatche) {
       console.log('match youtube');
      // TODO ajouter un attachement de type youtube dans attachements
+     let mes = message.split('=');
+     console.log('youtube : ' + mes[1])
       attachements.push({
         type: 'youtube',
-        videoId: message
+        videoId: mes[1]
       } as MessageYoutubeElement);
     }
 
