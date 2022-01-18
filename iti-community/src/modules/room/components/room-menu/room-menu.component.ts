@@ -24,14 +24,18 @@ export class RoomMenuComponent implements OnInit {
 
   async ngOnInit() {
     this.rooms = await this.queries.getAll();
+    this.roomSocketService.onNewRoom((room: Room)=>{
+      this.rooms.push(room)
+    })
+
   }
+
+
 
   
 
   goToRoom(room: Room) {
     this.router.navigate(["/app",room.id]);
-
-    // TODO naviguer vers app/[id de la room]
   }
 
   
