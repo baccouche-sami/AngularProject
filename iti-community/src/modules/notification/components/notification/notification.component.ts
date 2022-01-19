@@ -29,7 +29,7 @@ export class NotificationComponent implements OnInit {
 
   async webNotification(notification : AnyNotification) {
     if(notification.viewedAt) return;
-    
+
     let subject = notification.subject;
     let username = notification.payload.user.username;
 
@@ -58,6 +58,7 @@ export class NotificationComponent implements OnInit {
   }
 
   async ngOnInit() {
+    let shouldShowNotif = true;
     Notification.requestPermission();
     this.notificationSocketService.onNewNotification(async notif => {
       console.log(notif)
@@ -69,15 +70,14 @@ export class NotificationComponent implements OnInit {
         this.dataToShow.message
       );
       this.notificatStore.appendNotification(notif);
-      const notify = this.webNotification
-      document.addEventListener("visibilitychange", function() {
-        if (document.visibilityState === 'visible') {
-          //
-        } else {
-          notify(notif);
-        }
-      });
+      if(shouldShowNotif) {
+        this.webNotification(notif);
+      }
     })
+    document.addEventListener("visibilitychange", function() {
+      shouldShowNotif = document.visibilityState !== 'visible';
+    });
+    
     await this.notificationService.fetch()  
   }
 
