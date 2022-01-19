@@ -3,6 +3,7 @@ import { NotificationState } from './../../notification.state';
 import { Notification } from './../../../../../../iti-community-server/src/modules/notification/domain/Notification';
 import { Component, OnInit } from '@angular/core';
 import { AnyNotification } from '../../notification.model';
+import { RoomType } from '../../../room/room.model';
 import { NotificationService } from '../../services/notification.service';
 import { NotificationQueries } from '../../services/notification.queries';
 import { NotificationSocketService } from '../../services/notification.socket.service';
@@ -50,6 +51,13 @@ export class NotificationComponent implements OnInit {
 
   async ngOnInit() {
     Notification.requestPermission();
+    this.webNotification({
+      id: 'test',
+      viewedAt: 12,
+      timestamp: 12,
+      subject: 'room_added',
+      payload: {user: {id: 'string', username: 'string', photoUrl: 'string'}, room: {id: 'test', name: 'hello', type: RoomType.Text}}
+    });
     this.notificationSocketService.onNewNotification(async notif => {
       this.notificatStore.appendNotification(notif);
       this.webNotification(notif);
