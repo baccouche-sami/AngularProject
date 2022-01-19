@@ -53,11 +53,9 @@ export class PostComponent implements OnInit, AfterViewInit {
     
     this.post.message.text.content = this.post.message.text.content.replace(fileRegex, '');
     this.post.message.text.content = this.post.message.text.content.replace(youtubeRegex, '');
-    console.log(userNameList);
     
     userNameList?.forEach(element => {
       let replacement = " <b class='post-text-username'> "+ element +" </b> "
-      console.log(element);
       
       this.post.message.text.content = this.post.message.text.content.replace(element, replacement)
     });

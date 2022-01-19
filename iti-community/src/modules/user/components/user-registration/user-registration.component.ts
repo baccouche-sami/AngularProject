@@ -45,7 +45,6 @@ export class UserRegistrationComponent implements OnInit {
     exists ? this.nzMessageService.warning("Username already used") : 
     
     this.userService.register(this.model.username,this.model.password).then((result) => {
-          console.log(result);
           
            this.goToLogin();
         }).catch((err) => {

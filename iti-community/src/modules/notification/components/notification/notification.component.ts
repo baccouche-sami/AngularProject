@@ -61,7 +61,6 @@ export class NotificationComponent implements OnInit {
     let shouldShowNotif = true;
     Notification.requestPermission();
     this.notificationSocketService.onNewNotification(async notif => {
-      console.log(notif)
       this.notificatStore.appendNotification(notif)
       this.dataToShow = this.getNotifInfo(notif)
       this.notification.create(
@@ -84,9 +83,6 @@ export class NotificationComponent implements OnInit {
   
     open(event:Event) {
       this.isVisible = false;
-      console.log(event);
-      
-      console.log("Here");
       
     }
 

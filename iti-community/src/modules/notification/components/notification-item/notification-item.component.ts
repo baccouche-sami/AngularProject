@@ -74,11 +74,9 @@ export class NotificationItemComponent implements OnInit {
   }
 
   viewNotif(){
-    console.log(this.notifInfo);
     
 
    this.notificationService.markAsViewed().then((result) => {
-     console.log(result);
      
      this.router.navigateByUrl(this.notifInfo.link)
    }).catch((err) => {

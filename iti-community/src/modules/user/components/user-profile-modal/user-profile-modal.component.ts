@@ -81,11 +81,10 @@ export class UserProfileModalComponent implements OnInit {
 
     if (this.model.hasChanged()) {
       // TODO mettre à jour l'utilisateur via le service
-      console.log(this.model);
       
       this.userService.update({...this.model.user,photo:this.model.file})
       .then((result) => {
-        console.log(result);
+        
       }).catch((err) => {
         console.log(err);
       });
