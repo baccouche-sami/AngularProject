@@ -12,7 +12,7 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NotificationComponent } from './components/notification/notification.component';
 import { NotificationItemComponent } from './components/notification-item/notification-item.component';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { DateFormatPipePipe } from '../feed/services/date-format-pipe.pipe';
+import { DateFormatPipe } from './services/date-format.pipe';
 
 @NgModule({
   providers: [NotificationStore, NotificationService,NzNotificationService,
@@ -28,6 +28,6 @@ import { DateFormatPipePipe } from '../feed/services/date-format-pipe.pipe';
     NzMessageModule
   ],
   exports:[NotificationComponent],
-  declarations: [NotificationComponent, NotificationItemComponent, DateFormatPipePipe]
+  declarations: [NotificationComponent, NotificationItemComponent, DateFormatPipe]
 })
 export class NotificationModule { }
