@@ -1,13 +1,16 @@
-import { Component, Input, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
 import { DateTime } from 'luxon';
 import { element } from 'protractor';
+import { getReturnOfExpression } from 'utility-types';
 import { Post } from '../../post.model';
 import { PostService } from '../../services/post.service';
 
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
-  styleUrls: ['./post.component.less']
+  styleUrls: ['./post.component.less'],
+  encapsulation: ViewEncapsulation.None
+
 })
 export class PostComponent implements OnInit, AfterViewInit {
   @Input()
@@ -50,9 +53,9 @@ export class PostComponent implements OnInit, AfterViewInit {
     
     this.post.message.text.content = this.post.message.text.content.replace(fileRegex, '');
     this.post.message.text.content = this.post.message.text.content.replace(youtubeRegex, '');
-
+    
     userNameList?.forEach(element => {
-      let replacement = "<b class='post-text-username'> "+element+" </b>"
+      let replacement = " <b class='post-text-username'> "+element+" </b> "
       this.post.message.text.content = this.post.message.text.content.replace(usernameRegex, replacement)
     });
 
