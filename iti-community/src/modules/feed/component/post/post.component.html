@@ -3,17 +3,20 @@
 
   <!-- TIPS: [ngStyle]="{'background-image': url(...) }" -->
   <div class="post-author-photo" [ngStyle]="{'background-image': 'url(' + post.createdBy.photoUrl + ')'}" ></div>
-  <div class="post-date">{{ post.createdAt }}</div>
+  <div class="post-date">{{ post.createdAt | formatDate }}</div>
 
   <!-- TIPS: [ngClass]="{liked: [expression booléenne]}" -->
   <div class="post-user-like" [ngClass]="{liked: post.liked}" >
     <i (click)="like()" nz-icon nzType="heart" [nzTheme]="post.liked ? 'fill' : 'outline'" ></i>
-    {{post.likes}}
   </div>
 
   <p class="post-text">
     {{post.message.text.content}}
   </p>
+
+  <div *ngFor="let element of linkList">
+    <a [href]="element" target="_blank">{{ element }}</a>
+  </div>
 
   <!-- Itérer sur les "attachements" du message -->
   <div class="post-attachements" *ngFor="let element of post.message.attachements">

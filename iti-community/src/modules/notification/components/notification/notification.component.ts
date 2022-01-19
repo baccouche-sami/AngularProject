@@ -1,4 +1,4 @@
-import { NotifInfo } from './../../notification.model';
+import { NotifInfo, PostLikedNotification } from './../../notification.model';
 import { NotificationStore } from './../../notification.store';
 import { NotificationState } from './../../notification.state';
 import { Component, OnInit } from '@angular/core';

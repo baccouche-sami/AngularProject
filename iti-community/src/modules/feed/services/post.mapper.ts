@@ -1,3 +1,4 @@
+import { DateTime } from 'luxon';
 import { MessageAudioElement, MessageElement, MessageImageElement, MessageTextElement, MessageVideoElement, MessageYoutubeElement, Post, PostData, PostMessage } from '../post.model';
 
 export class PostMapper {
@@ -6,7 +7,6 @@ export class PostMapper {
     return {
       ...data,
       message: this.parseMessage(`${data.message} ${data.attachementUrl ? data.attachementUrl : ''}`.trim()),
-      createdAt : (date.getDate()).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + '/' + ((date.getMonth() + 1)).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + '/' + date.getFullYear() + ' à ' + (date.getHours()).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + ':' + (date.getMinutes()).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + ':' + (date.getSeconds()).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
     }
   }
 
@@ -28,8 +28,6 @@ export class PostMapper {
     let audioList = message.match(audioRegex);
     let videoList = message.match(videoRegex);
     let pictureList = message.match(pictureRegex);
-
-    console.log(youtubeList, audioList, videoList, pictureList);
 
     youtubeList?.forEach(element => {
       let id = element.split('=')[1];
