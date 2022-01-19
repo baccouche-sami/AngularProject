@@ -1,5 +1,7 @@
 import { AnyNotification, NotifInfo } from './../../notification.model';
 import { Component, Input, OnInit } from '@angular/core';
+import { NotificationService } from '../../services/notification.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-notification-item',
@@ -10,7 +12,7 @@ export class NotificationItemComponent implements OnInit {
   @Input()
   notif: AnyNotification;
   notifInfo: NotifInfo;
-  constructor() {
+  constructor(private notificationService:NotificationService, private router: Router) {
     this.notifInfo = this.getNotifInfo(this.notif)
    }
 
@@ -32,35 +34,58 @@ export class NotificationItemComponent implements OnInit {
       link: ""
     }
     if (this.notif) {
+      var theDate = new Date(this.notif.timestamp * 1000);
+      let dateString = theDate.toUTCString();
       switch (this.notif.subject) {
         case 'room_added':
           data.subject = 'Room Added'
           data.message = 'A Room was added by '+this.notif.payload.user.username
           data.photoUser=this.notif.payload.user.photoUrl
-          data.link = "room" in this.notif.payload ? this.notif.payload.room.id : "#"
+          data.link = "room" in this.notif.payload ? "app/"+this.notif.payload.room.id : "#"
+          data.date = dateString
+          data.viewed = this.notif.viewedAt
           return data;
         case 'post_liked':
           data.subject = 'Post Liked'
           data.message = 'Your post was liked by '+this.notif.payload.user.username
           data.photoUser=this.notif.payload.user.photoUrl
-          data.link = "postId" in this.notif.payload ? this.notif.payload.postId : "#"
+          data.link = "postId" in this.notif.payload ? "app/"+this.notif.payload.roomId : "#"
+          data.date = dateString
+          data.viewed = this.notif.viewedAt
           return data;
         case 'new_user':
-          data.subject = 'Room Added'
-          data.message = 'A Room was added by '+this.notif.payload.user.username
+          data.subject = 'User Added'
+          data.message = 'Say Hello To  '+this.notif.payload.user.username
           data.photoUser=this.notif.payload.user.photoUrl
           data.link = this.notif.payload.user.id
+          data.date = dateString
+          data.viewed = this.notif.viewedAt
           return data;
       
         default:
           data.subject = 'No Subject Found'
           data.message = 'No message'
           data.photoUser= '#'
+          data.date = dateString
           return data;
           
       } 
     } 
     return data
+  }
+
+  viewNotif(){
+    console.log(this.notifInfo);
+    
+
+   this.notificationService.markAsViewed().then((result) => {
+     console.log(result);
+     
+     this.router.navigateByUrl(this.notifInfo.link)
+   }).catch((err) => {
+     console.log(err);
+     
+   });
   }
 
 }
