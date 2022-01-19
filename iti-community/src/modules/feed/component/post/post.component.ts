@@ -23,6 +23,8 @@ export class PostComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit(): void {
+    console.log(this.post);
+    
     this.divideMessage();
   }
 
