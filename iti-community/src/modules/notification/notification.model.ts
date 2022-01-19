@@ -18,7 +18,7 @@ export interface NotifInfo {
   subject:string,
   message: string,
   photoUser?: string,
-  date?:string,
+  date?:number,
   viewed?:number
   link:string
 }
