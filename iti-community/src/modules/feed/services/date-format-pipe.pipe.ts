@@ -8,7 +8,7 @@ export class DateFormatPipePipe implements PipeTransform {
 
   transform(value: number) {
     console.log(value); 
-    let date = DateTime.fromSeconds(value)
+    let date = DateTime.fromSeconds(value/1000)
     return date.setLocale('fr').toLocaleString({
            year: 'numeric',
            month: 'long',
