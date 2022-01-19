@@ -14,6 +14,13 @@ export interface AppNotification<TSubject extends NotificationSubject, TData ext
   payload: TData;
 }
 
+export interface NotifInfo {
+  subject:string,
+  message: string,
+  photoUser?: string,
+  link:string
+}
+
 export type RoomAddedNotification = AppNotification<'room_added', {
   user: User;
   room: Room;

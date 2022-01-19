@@ -1,0 +1,8 @@
+<div class="card">
+    <img *ngIf="notifInfo.photoUser" [src]=notifInfo.photoUser alt="Avatar" style="width:20%;border-radius: 10px;">
+    <div class="container">
+      <h4><b>{{notifInfo.subject}}</b></h4>
+      <p>{{notifInfo.message}}</p>
+      <a [href]=notifInfo.link >View Details</a>
+    </div>
+</div>
