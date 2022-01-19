@@ -4,6 +4,7 @@ import { AuthenticationStore } from "src/modules/authentication/authentication.s
 import { WebSocketTopic } from "src/modules/common/WebSocketTopic";
 import { AnyNotification } from "../notification.model";
 
+
 @Injectable()
 export class NotificationSocketService {
   private subscription?: [string, (notif: AnyNotification) => any];

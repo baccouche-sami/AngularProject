@@ -26,7 +26,36 @@ export class NotificationComponent implements OnInit {
     this.notifications$ = this.notificatStore.get(s=>s.notifications)
    }
 
+  async webNotification(notification : AnyNotification) {
+    let subject = notification.subject;
+    let username = notification.payload.user.username;
+
+    Notification.requestPermission().then(function(result) {
+      let img  = ''
+      let message = ''
+      if (subject = "post_liked") {
+        img = 'https://image.shutterstock.com/image-vector/counter-notification-icon-social-media-260nw-1340641793.jpg'
+        message = 'Your post has been liked'
+      } else if (subject = "new_user") {
+        img = 'https://cdn3.iconfinder.com/data/icons/basicolor-essentials/24/055_add_new_user-512.png'
+        message = "There is a new user in the commun'iti !"
+      } else {
+        img = 'https://image.shutterstock.com/image-vector/add-users-icon-group-people-260nw-1536547337.jpg'
+        message = 'A new room has been created'
+      }
+      const text = message;
+      const notification = new Notification(username, { body: text, icon: img });
+
+      document.addEventListener('visibilitychange', function() {
+        if (document.visibilityState === 'visible') {
+          notification.close();
+        }
+      });
+    });
+  }
+
   async ngOnInit() {
+    Notification.requestPermission();
     this.notificationSocketService.onNewNotification(async notif => {
       console.log(notif)
       this.notificatStore.appendNotification(notif)
@@ -36,6 +65,8 @@ export class NotificationComponent implements OnInit {
         this.dataToShow.subject,
         this.dataToShow.message
       );
+      this.notificatStore.appendNotification(notif);
+      this.webNotification(notif);
     })
     await this.notificationService.fetch()  
   }
