@@ -54,6 +54,7 @@ export function registerNotificationModule(container: Container, emitter: Domain
         }
 
         await notifService.append(post.createdBy, "post_liked", {
+            roomId: post.roomId,
             postId: post.id,
             preview: post.message.substr(0, 128),
             user: {

@@ -18,6 +18,8 @@ export interface NotifInfo {
   subject:string,
   message: string,
   photoUser?: string,
+  date?:string,
+  viewed?:number
   link:string
 }
 
@@ -29,6 +31,7 @@ export type RoomAddedNotification = AppNotification<'room_added', {
 export type PostLikedNotification = AppNotification<'post_liked', {
   user: User;
   postId: string;
+  roomId: string
   preview: string;
 }>
 
