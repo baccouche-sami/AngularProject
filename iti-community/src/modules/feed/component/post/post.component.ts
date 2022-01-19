@@ -17,6 +17,7 @@ export class PostComponent implements OnInit, AfterViewInit {
   anchor: ElementRef<HTMLDivElement>;
 
   linkList : String[];
+  messageArray : String[];
 
   constructor(
     private postService: PostService
@@ -40,6 +41,8 @@ export class PostComponent implements OnInit, AfterViewInit {
     const fileRegex = /http[s]?:\/\/\S+?\.(?:jpeg|jpg|png|gif|mp4|wmv|flv|avi|wav|mp3|ogg|wav)/gmi;
 
     const youtubeRegex = /(http[s]?:\/\/)?www\.(?:youtube\.com\/\S*(?:(?:\/e(?:mbed))?\/|watch\/?\?(?:\S*?&?v\=))|youtu\.be\/)([a-zA-Z0-9_-]{6,11})/gmi;
+
+    const usernameRegex = /@[A-Za-z0-9_]\w+/gmi;
     
 
     let youtubeList = this.post.message.text.content.match(youtubeRegex);
@@ -47,20 +50,14 @@ export class PostComponent implements OnInit, AfterViewInit {
     
     this.post.message.text.content = this.post.message.text.content.replace(fileRegex, '');
     this.post.message.text.content = this.post.message.text.content.replace(youtubeRegex, '');
-<<<<<<< HEAD
-=======
-    console.log(userNameList);
-    
-    userNameList?.forEach(element => {
-      let replacement = " <b class='post-text-username'> "+ element +" </b> "
-      console.log(element);
-      
-      this.post.message.text.content = this.post.message.text.content.replace(element, replacement)
-    });
->>>>>>> b01a7ef358c1a53a795c8e4ff0a4f155acea208e
 
     this.linkList = [...youtubeList??[], ...fileList??[]];
 
     return null;
+  }
+
+  findUsername() {
+    const usernameRegex = /@[A-Za-z0-9_]\w+/gmi;
+    this.messageArray = this.post.message.text.content.split(usernameRegex);
   }
 }
