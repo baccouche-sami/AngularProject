@@ -13,7 +13,7 @@
   <p class="post-text" [innerHTML]=post.message.text.content>
   </p>
 
-  <div *ngFor="let element of linkList">
+  <div class="post-links" *ngFor="let element of linkList">
     <a [href]="element" target="_blank">{{ element }}</a>
   </div>
 
