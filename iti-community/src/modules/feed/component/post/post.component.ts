@@ -17,15 +17,16 @@ export class PostComponent implements OnInit, AfterViewInit {
   anchor: ElementRef<HTMLDivElement>;
 
   linkList : String[];
+  messageArray : String[];
 
   constructor(
     private postService: PostService
   ) { }
 
   ngOnInit(): void {
-    console.log(this.post);
     
     this.divideMessage();
+    this.findUsername();
   }
 
   ngAfterViewInit() {
@@ -52,5 +53,10 @@ export class PostComponent implements OnInit, AfterViewInit {
     this.linkList = [...youtubeList??[], ...fileList??[]];
 
     return null;
+  }
+
+  findUsername() {
+    const usernameRegex = /(?=@[A-Za-z0-9_]\w+)|(?<=@[A-Za-z0-9_]\w+)/gmi;
+    this.messageArray = this.post.message.text.content.split(usernameRegex);
   }
 }
