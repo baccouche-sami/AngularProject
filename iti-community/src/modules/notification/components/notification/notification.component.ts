@@ -28,16 +28,18 @@ export class NotificationComponent implements OnInit {
    }
 
   async webNotification(notification : AnyNotification) {
+    if(notification.viewedAt) return;
+    
     let subject = notification.subject;
     let username = notification.payload.user.username;
 
     Notification.requestPermission().then(function(result) {
       let img  = ''
       let message = ''
-      if (subject = "post_liked") {
+      if (subject === "post_liked") {
         img = 'https://image.shutterstock.com/image-vector/counter-notification-icon-social-media-260nw-1340641793.jpg'
         message = 'Your post has been liked'
-      } else if (subject = "new_user") {
+      } else if (subject === "new_user") {
         img = 'https://cdn3.iconfinder.com/data/icons/basicolor-essentials/24/055_add_new_user-512.png'
         message = "There is a new user in the commun'iti !"
       } else {
@@ -57,13 +59,6 @@ export class NotificationComponent implements OnInit {
 
   async ngOnInit() {
     Notification.requestPermission();
-    this.webNotification({
-      id: 'test',
-      viewedAt: 12,
-      timestamp: 12,
-      subject: 'room_added',
-      payload: {user: {id: 'string', username: 'string', photoUrl: 'string'}, room: {id: 'test', name: 'hello', type: RoomType.Text}}
-    });
     this.notificationSocketService.onNewNotification(async notif => {
       console.log(notif)
       this.notificatStore.appendNotification(notif)
@@ -74,7 +69,14 @@ export class NotificationComponent implements OnInit {
         this.dataToShow.message
       );
       this.notificatStore.appendNotification(notif);
-      this.webNotification(notif);
+      const notify = this.webNotification
+      document.addEventListener("visibilitychange", function() {
+        if (document.visibilityState === 'visible') {
+          //
+        } else {
+          notify(notif);
+        }
+      });
     })
     await this.notificationService.fetch()  
   }
