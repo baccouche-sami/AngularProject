@@ -34,8 +34,7 @@ export class NotificationItemComponent implements OnInit {
       link: ""
     }
     if (this.notif) {
-      var theDate = new Date(this.notif.timestamp * 1000);
-      let dateString = theDate.toUTCString();
+      let dateString = this.notif.timestamp / 1000
       switch (this.notif.subject) {
         case 'room_added':
           data.subject = 'Room Added'

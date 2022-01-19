@@ -3,7 +3,7 @@
     <div class="container">
       <h4><b>{{notifInfo.subject}}</b></h4>
       <p>{{notifInfo.message}}</p>
-      <span>{{notifInfo.date}}</span> <br>
+      <span>{{notifInfo.date | dateFormat}}</span> <br>
       <a (click)="viewNotif()" style="font-weight: 500;" >View Details</a>
     </div>
 </div>
