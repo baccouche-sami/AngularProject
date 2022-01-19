@@ -27,7 +27,6 @@ export class PostComponent implements OnInit, AfterViewInit {
   }
 
   async like() {
-    this.post.liked = !this.post.liked;
-    this.postService.like(this.post);
+    this.postService.like(this.post)
   }
 }

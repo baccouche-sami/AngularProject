@@ -32,5 +32,6 @@ export class PostService {
 
     like(post: Post) {
         post.liked = !post.liked;
+        this.commands.like(post.roomId, post.id);
     }
 }
