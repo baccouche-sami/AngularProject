@@ -7,7 +7,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "private": true,
   "dependencies": {
@@ -19,11 +21,11 @@
     "@angular/platform-browser": "~11.0.0",
     "@angular/platform-browser-dynamic": "~11.0.0",
     "@angular/router": "~11.0.0",
-    "socket.io-client": "~3.1.0",
     "lodash-es": "^4.17.15",
     "luxon": "1.25.0",
     "ng-zorro-antd": "^10.1.0",
     "rxjs": "~6.6.0",
+    "socket.io-client": "~3.1.0",
     "tslib": "^2.0.0",
     "utility-types": "^3.10.0",
     "zone.js": "~0.11.3"
@@ -32,11 +34,12 @@
     "@angular-devkit/build-angular": "~0.1100.1",
     "@angular/cli": "~11.0.1",
     "@angular/compiler-cli": "~11.0.0",
-    "@types/node": "^12.11.1",
+    "@cypress/schematic": "^1.6.0",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/lodash-es": "^4.17.3",
     "@types/luxon": "1.25.0",
+    "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
@@ -48,6 +51,7 @@
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~4.0.2"
+    "typescript": "~4.0.2",
+    "cypress": "latest"
   }
 }
